@@ -1,0 +1,14 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: user-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/users
+    username: postgres
+    password: postgres
+
+jwt:
+  secret: MySecretCodeThatIsLongerThanBefore
+

@@ -1,0 +1,79 @@
+openapi: "3.0.3"
+info:
+  title: "authentication-service"
+  version: "1.0.0"
+servers:
+  - url: "https://localhost:8765"
+paths:
+  /auth/register:
+    post:
+      summary: "Зарегистрировать пользователя"
+      operationId: "register"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /auth/login:
+    post:
+      summary: "Залогинить пользователя"
+      operationId: "login"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/UserDTO"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+  /auth/refresh:
+    post:
+      summary: "Обновить токены ползователя"
+      operationId: "refreshToken"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              $ref: "#/components/schemas/AuthRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                $ref: "#/components/schemas/AuthResponse"
+components:
+  schemas:
+    UserDTO:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+        password:
+          type: "string"
+    AuthResponse:
+      type: "object"
+      properties:
+        accessToken:
+          type: "string"
+        refreshToken:
+          type: "string"
+    AuthRequest:
+      type: "object"
+      properties:
+        refreshToken:
+          type: "string"

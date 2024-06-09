@@ -1,0 +1,15 @@
+#For cassandra in cqlsh
+CREATE KEYSPACE usersContactsKeyspace WITH replication = {
+    'class': 'SimpleStrategy',
+    'replication_factor': 1
+};
+
+USE usersContactsKeyspace;
+
+CREATE TABLE contacts (
+    id UUID PRIMARY KEY,
+    user_id INT,
+    user_name VARCHAR,
+    user_contact VARCHAR,
+	mailing_status VARCHAR
+);
