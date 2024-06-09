@@ -9,5 +9,6 @@ import lombok.*;
 @Getter
 public class Message {
     private int userId;
+    private String article;
     private String message;
 }

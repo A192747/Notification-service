@@ -11,8 +11,8 @@ public class MessageService {
     private KafkaTemplate<String, Message> kafkaTemplate;
     private final String topicName = "mailingTopic";
 
-    public void sendMessage(int userId, String text) {
-        Message msg = new Message(userId, text);
+    public void sendMessage(int userId, String article, String text) {
+        Message msg = new Message(userId, article, text);
         kafkaTemplate.send(topicName, msg);
     }
 }

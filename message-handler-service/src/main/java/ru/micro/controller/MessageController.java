@@ -1,7 +1,9 @@
 package ru.micro.controller;
 
+import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import ru.micro.dto.MessageRequest;
 import ru.micro.service.MessageService;
 
 
@@ -12,8 +14,8 @@ public class MessageController {
     MessageService msgService;
     @PostMapping()
     public void addToKafka(@RequestHeader("id") int userId,
-                     @RequestBody String text) {
-        msgService.sendMessage(userId, text);
+                     @RequestBody @Valid MessageRequest msg) {
+        msgService.sendMessage(userId, msg.getArticle(), msg.getMessage());
     }
 
 }

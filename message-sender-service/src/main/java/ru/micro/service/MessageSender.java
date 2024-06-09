@@ -20,10 +20,15 @@ public class MessageSender {
 //    private SmsSender smsSender;
 
     public void send(Message message) {
+        /* TODO
+         Добавить обработку при перезапуске.
+         Чтобы после неотправленные сообщения доотправились.
+         */
         List<Contacts> list = repository.findAllByUserId(message.getUserId());
         setStatusAndSave(list, MailingStatus.IN_PROCESS);
 
-        list.forEach(el -> sendSingleMessage(el, message.getMessage()));
+        list.forEach(el -> sendSingleMessage(el, message));
+        setStatusAndSave(list, MailingStatus.NOT_STARTED);
     }
 
     private void setStatusAndSave(List<Contacts> list, MailingStatus status) {
@@ -31,10 +36,12 @@ public class MessageSender {
         repository.saveAll(list);
     }
 
-    private void sendSingleMessage(Contacts contact, String text) {
+    private void sendSingleMessage(Contacts contact, Message msg) {
         String personContact = contact.getUserContact();
+        String article = msg.getArticle();
+        String text = msg.getMessage();
         switch (contact.getContactType()) {
-            case Email -> emailSender.send(personContact, text);
+            case Email -> emailSender.send(personContact, article, text);
             //case Sms -> ...
         }
         setStatusAndSave(List.of(contact), MailingStatus.DONE);
