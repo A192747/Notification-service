@@ -20,9 +20,12 @@ public class GatewayConfig {
                 .route("auth-service", r -> r.path("/auth/**")
                         .filters(f -> f.filter(filter))
                         .uri("lb://auth-service"))
-                .route("save-info-service", r -> r.path("/upload")
+                .route("save-info-service", r -> r.path("/contacts")
                         .filters(f -> f.filter(filter))
                         .uri("lb://save-info-service"))
+                .route("message-handler-service", r -> r.path("/messages")
+                        .filters(f -> f.filter(filter))
+                        .uri("lb://message-handler-service"))
                 // Add more routes here based on the configuration in application.yml
                 .build();
     }

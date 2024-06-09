@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.micro</groupId>
-    <artifactId>save-info-service</artifactId>
+    <artifactId>message-sender-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>save-info-service</name>
-    <description>save-info-service</description>
+    <name>message-sender-service</name>
+    <description>message-sender-service</description>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
@@ -20,21 +20,6 @@
         <spring-cloud.version>2023.0.0</spring-cloud.version>
     </properties>
     <dependencies>
-        <!--        <dependency>-->
-        <!--            <groupId>com.datastax.cassandra</groupId>-->
-        <!--            <artifactId>cassandra-driver-core</artifactId>-->
-        <!--            <version>3.2.0</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>com.datastax.cassandra</groupId>-->
-        <!--            <artifactId>cassandra-driver-mapping</artifactId>-->
-        <!--            <version>3.11.0</version>-->
-        <!--        </dependency>-->
-        <!--        <dependency>-->
-        <!--            <groupId>org.springframework.data</groupId>-->
-        <!--            <artifactId>spring-data-cassandra</artifactId>-->
-        <!--            <version>4.2.5</version>-->
-        <!--        </dependency>-->
         <dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
@@ -45,7 +30,7 @@
             <artifactId>poi-ooxml</artifactId>
             <version>5.2.0</version>
         </dependency>
-        <!-- https://mvnrepository.com/artifact/org.springframework/spring-tx -->
+
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-tx</artifactId>
@@ -72,6 +57,10 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
         </dependency>
     </dependencies>
     <dependencyManagement>

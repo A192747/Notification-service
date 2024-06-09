@@ -11,5 +11,6 @@ CREATE TABLE contacts (
     user_id INT,
     user_name VARCHAR,
     user_contact VARCHAR,
-	mailing_status VARCHAR
+	mailing_status VARCHAR,
+	contact_type VARCHAR
 );

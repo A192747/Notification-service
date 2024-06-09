@@ -1,0 +1,27 @@
+openapi: "3.0.3"
+info:
+  title: "Сервис, принимающий сообщение от пользователя для рассылки"
+  version: "1.0.0"
+servers:
+  - url: "https://localhost:8765"
+paths:
+  /messages:
+    post:
+      summary: "Отправить сообщение для рассылки"
+      operationId: "addToKafka"
+      parameters:
+        - name: "id"
+          in: "header"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "string"
+        required: true
+      responses:
+        "200":
+          description: "OK"

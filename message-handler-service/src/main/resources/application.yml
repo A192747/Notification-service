@@ -1,0 +1,17 @@
+server:
+  port: 8083
+
+spring:
+  application:
+    name: message-handler-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: mailing
+
+io:
+  reflectoring:
+    kafka:
+      bootstrap-servers: localhost:9092
+
+

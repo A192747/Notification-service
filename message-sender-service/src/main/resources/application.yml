@@ -1,0 +1,21 @@
+server:
+  port: 8084
+
+spring:
+  application:
+    name: message-sender-service
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: mailing
+  cassandra:
+    port: 9042
+    contact-points: usersContactsKeyspace
+    keyspace-name: usersContactsKeyspace
+
+io:
+  reflectoring:
+    kafka:
+      bootstrap-servers: localhost:9092
+
+
