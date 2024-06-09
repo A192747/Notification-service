@@ -13,7 +13,7 @@
     <module>config-service</module>
     <module>user-service</module>
     <module>authentication-service</module>
-    <module>save-info-service</module>
+    <module>contacts-service</module>
     <module>message-handler-service</module>
     <module>message-sender-service</module>
     <module>gateway-service</module>

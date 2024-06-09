@@ -3,7 +3,7 @@ server:
 
 spring:
   application:
-    name: save-info-service
+    name: contacts-service
   cassandra:
     port: 9042
     contact-points: usersContactsKeyspace

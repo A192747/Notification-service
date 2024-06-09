@@ -1,0 +1,63 @@
+openapi: "3.0.3"
+info:
+  title: "Сервис работы с контактами пользователей"
+  description: "Notification_project API"
+  version: "1.0.0"
+servers:
+  - url: "https://localhost:8765"
+paths:
+  /contacts:
+    post:
+      summary: "Загрузить список контактов"
+      operationId: "save"
+      parameters:
+        - name: "file"
+          in: "query"
+          required: true
+          schema:
+            type: "string"
+            format: "binary"
+        - name: "id"
+          in: "header"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+    get:
+      summary: "Получить загруженные контакты"
+      operationId: "getContacts"
+      parameters:
+        - name: "id"
+          in: "header"
+          required: true
+          schema:
+            type: "integer"
+            format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          content:
+            '*/*':
+              schema:
+                type: "array"
+                items:
+                  $ref: "#/components/schemas/ContactResponse"
+components:
+  schemas:
+    ContactResponse:
+      type: "object"
+      properties:
+        userName:
+          type: "string"
+        contact:
+          type: "string"
+        type:
+          type: "string"
+          enum:
+            - "Email"
+            - "Tg"
+            - "Sms"
+            - "Unknown"

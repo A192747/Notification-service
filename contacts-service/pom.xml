@@ -9,10 +9,10 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>ru.micro</groupId>
-    <artifactId>save-info-service</artifactId>
+    <artifactId>contacts-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>save-info-service</name>
-    <description>save-info-service</description>
+    <name>contacts-service</name>
+    <description>contacts-service</description>
     <properties>
         <maven.compiler.source>21</maven.compiler.source>
         <maven.compiler.target>21</maven.compiler.target>
