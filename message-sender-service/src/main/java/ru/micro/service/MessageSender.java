@@ -6,7 +6,7 @@ import ru.micro.dto.Message;
 import ru.micro.entity.Contacts;
 import ru.micro.model.MailingStatus;
 import ru.micro.repository.ContactsRepository;
-import ru.micro.service.Senders.EmailSender;
+import ru.micro.service.senders.EmailSender;
 
 import java.util.List;
 
@@ -27,15 +27,23 @@ public class MessageSender {
          */
 
         List<Contacts> list;
-        if(message.getUserName() != null) {
-            list  = List.of(repository.findByUserNameAndUserId(message.getUserName(), message.getUserId()));
+        int userId = message.getUserId();
+        String userName = message.getUserName();
+
+        if (userName != null) {
+            list = List.of(repository.findByUserNameAndUserId(userName, userId));
         } else {
-            list = repository.findAllByUserId(message.getUserId());
+            list = repository.findAllByUserId(userId);
         }
 
-        setStatusAndSave(list, MailingStatus.IN_PROCESS);
+        //для того, чтобы доотправить сообщения после перезапуска
+        List<Contacts> inProcess = list.stream().filter(el -> el.getMailingStatus().equals(MailingStatus.IN_PROCESS)).toList();
+        if (!inProcess.isEmpty())
+            list = inProcess;
+        else
+            setStatusAndSave(list, MailingStatus.IN_PROCESS);
 
-        list.forEach(el -> sendSingleMessage(el, message));
+        list.forEach(el -> sendMessage(el, message));
         setStatusAndSave(list, MailingStatus.NOT_STARTED);
     }
 
@@ -44,7 +52,7 @@ public class MessageSender {
         repository.saveAll(list);
     }
 
-    private void sendSingleMessage(Contacts contact, Message msg) {
+    private void sendMessage(Contacts contact, Message msg) {
         String personContact = contact.getUserContact();
         String article = msg.getArticle();
         String text = msg.getMessage();

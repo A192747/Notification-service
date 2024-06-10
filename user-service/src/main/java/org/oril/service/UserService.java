@@ -20,7 +20,7 @@ public class UserService {
 
     @Transactional(transactionManager = "transactionManager")
     public User save(UserDTO userDTO) {
-        if(userRepository.findByName(userDTO.getName()) != null)
+        if (userRepository.findByName(userDTO.getName()) != null)
             throw new NotValidException("Это имя пользователя уже занято. Попробуйте другое");
         User user = convertToUser(userDTO);
         System.out.println(user);

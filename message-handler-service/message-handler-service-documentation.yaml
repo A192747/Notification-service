@@ -1,6 +1,6 @@
 openapi: "3.0.3"
 info:
-  title: "Сервис обработчик сообщения"
+  title: "Сервис обработчик сообщений"
   description: "Notification_project API"
   version: "1.0.0"
 servers:
@@ -10,7 +10,7 @@ paths:
     post:
       summary: "Отправить сообщение"
       operationId: "addToKafka"
-      
+
       requestBody:
         content:
           application/json:

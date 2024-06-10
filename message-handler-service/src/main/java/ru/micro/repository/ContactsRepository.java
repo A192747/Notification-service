@@ -10,6 +10,9 @@ import java.util.UUID;
 
 @Repository
 public interface ContactsRepository extends CassandraRepository<Contacts, UUID> {
+    @Query("SELECT * FROM contacts WHERE user_id =?0 ALLOW FILTERING")
+    List<Contacts> findAllByUserId(Integer userId);
+
     @Query("SELECT * FROM contacts WHERE user_name = ?0 AND user_id = ?1 LIMIT 1 ALLOW FILTERING")
     Contacts findByUserNameAndUserId(String userName, Integer userId);
 }

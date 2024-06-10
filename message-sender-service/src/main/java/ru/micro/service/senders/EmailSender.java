@@ -1,6 +1,5 @@
-package ru.micro.service.Senders;
+package ru.micro.service.senders;
 
-import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
@@ -17,6 +16,7 @@ public class EmailSender implements Sender {
 
     @Value("spring.mail.username")
     private String fromUser;
+
     @Override
     public void send(String personContact, String article, String text) {
         SimpleMailMessage message = new SimpleMailMessage();

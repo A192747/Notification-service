@@ -34,13 +34,13 @@ public class GlobalExceptionHandler {
         return new ResponseEntity<>(response, HttpStatus.BAD_REQUEST);
     }
 
-//    @ExceptionHandler({})
-//    public ResponseEntity<ErrorResponse> handleNotFoundExceptions(Exception exception) {
-//        ErrorResponse response = new ErrorResponse(
-//                exception.getMessage(),
-//                new Date(System.currentTimeMillis())
-//        );
-//        return new ResponseEntity<>(response, HttpStatus.NOT_FOUND);
-//    }
+    @ExceptionHandler({TooManyRequestsException.class})
+    public ResponseEntity<ErrorResponse> handleNotFoundExceptions(Exception exception) {
+        ErrorResponse response = new ErrorResponse(
+                exception.getMessage(),
+                new Date(System.currentTimeMillis())
+        );
+        return new ResponseEntity<>(response, HttpStatus.TOO_MANY_REQUESTS);
+    }
 }
 

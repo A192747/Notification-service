@@ -17,6 +17,7 @@ public class UserApplication {
     public ModelMapper modelMapper() {
         return new ModelMapper();
     }
+
     @Bean
     @LoadBalanced
     public RestTemplate restTemplate() {

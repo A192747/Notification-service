@@ -12,9 +12,10 @@ import ru.micro.service.MessageService;
 public class MessageController {
     @Autowired
     MessageService msgService;
+
     @PostMapping()
     public void addToKafka(@RequestHeader("id") int userId,
-                     @RequestBody @Valid MessageRequest msg) {
+                           @RequestBody @Valid MessageRequest msg) {
         msgService.sendMessage(userId, msg.getUserName(), msg.getArticle(), msg.getMessage());
     }
 

@@ -10,6 +10,7 @@ import ru.micro.dto.Message;
 public class MessageListener {
     @Autowired
     MessageSender sender;
+
     @KafkaListener(topics = "mailingTopic", groupId = "mailing")
     void listener(Message message) {
         System.out.println(message);
