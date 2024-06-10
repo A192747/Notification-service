@@ -10,13 +10,7 @@ paths:
     post:
       summary: "Отправить сообщение"
       operationId: "addToKafka"
-      parameters:
-        - name: "id"
-          in: "header"
-          required: true
-          schema:
-            type: "integer"
-            format: "int32"
+      
       requestBody:
         content:
           application/json:
@@ -31,6 +25,8 @@ components:
     MessageRequest:
       type: "object"
       properties:
+        userName:
+          type: "string"
         article:
           type: "string"
         message:

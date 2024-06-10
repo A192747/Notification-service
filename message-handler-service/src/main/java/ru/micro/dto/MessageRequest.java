@@ -11,6 +11,8 @@ import lombok.*;
 @Setter
 @Getter
 public class MessageRequest {
+//    @NotEmpty(message = "Поле userName не должно быть пустым")
+    private String userName;
     @NotNull
     @NotEmpty(message = "Тема сообщения должна быть указана")
     @Size(min = 1)

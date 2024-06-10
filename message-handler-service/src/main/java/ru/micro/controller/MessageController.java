@@ -15,7 +15,7 @@ public class MessageController {
     @PostMapping()
     public void addToKafka(@RequestHeader("id") int userId,
                      @RequestBody @Valid MessageRequest msg) {
-        msgService.sendMessage(userId, msg.getArticle(), msg.getMessage());
+        msgService.sendMessage(userId, msg.getUserName(), msg.getArticle(), msg.getMessage());
     }
 
 }

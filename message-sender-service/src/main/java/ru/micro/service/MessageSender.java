@@ -6,7 +6,6 @@ import ru.micro.dto.Message;
 import ru.micro.entity.Contacts;
 import ru.micro.model.MailingStatus;
 import ru.micro.repository.ContactsRepository;
-import ru.micro.service.interfaces.Sender;
 
 import java.util.List;
 
@@ -20,11 +19,19 @@ public class MessageSender {
 //    private SmsSender smsSender;
 
     public void send(Message message) {
+
         /* TODO
          Добавить обработку при перезапуске.
          Чтобы после неотправленные сообщения доотправились.
          */
-        List<Contacts> list = repository.findAllByUserId(message.getUserId());
+
+        List<Contacts> list;
+        if(message.getUserName() != null) {
+            list  = List.of(repository.findByUserNameAndUserId(message.getUserName(), message.getUserId()));
+        } else {
+            list = repository.findAllByUserId(message.getUserId());
+        }
+
         setStatusAndSave(list, MailingStatus.IN_PROCESS);
 
         list.forEach(el -> sendSingleMessage(el, message));
