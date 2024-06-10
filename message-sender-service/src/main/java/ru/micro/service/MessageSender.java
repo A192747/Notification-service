@@ -6,6 +6,7 @@ import ru.micro.dto.Message;
 import ru.micro.entity.Contacts;
 import ru.micro.model.MailingStatus;
 import ru.micro.repository.ContactsRepository;
+import ru.micro.service.Senders.EmailSender;
 
 import java.util.List;
 

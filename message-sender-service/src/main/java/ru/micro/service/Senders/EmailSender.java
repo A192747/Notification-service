@@ -1,4 +1,4 @@
-package ru.micro.service;
+package ru.micro.service.Senders;
 
 import jakarta.validation.Valid;
 import org.springframework.beans.factory.annotation.Autowired;
