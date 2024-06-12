@@ -60,6 +60,7 @@ public class MessageSender {
             case Email -> emailSender.send(personContact, article, text);
             //case Sms -> ...
         }
+//        System.out.println("DONE sending" + msg);
         setStatusAndSave(List.of(contact), MailingStatus.DONE);
     }
 

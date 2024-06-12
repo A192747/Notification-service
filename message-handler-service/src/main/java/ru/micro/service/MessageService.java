@@ -1,6 +1,7 @@
 package ru.micro.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 import ru.micro.dto.Message;
@@ -9,13 +10,18 @@ import ru.micro.exceptions.TooManyRequestsException;
 import ru.micro.model.MailingStatus;
 import ru.micro.repository.ContactsRepository;
 
+import java.util.List;
+import java.util.Random;
+import java.util.random.RandomGenerator;
+
 @Service
 public class MessageService {
     @Autowired
     private KafkaTemplate<String, Message> kafkaTemplate;
     @Autowired
     private ContactsRepository repository;
-    private final String topicName = "mailingTopic";
+    @Value("${spring.kafka.topics.mailing}")
+    private String topicName;
 
     public void sendMessage(int userId, String userName, String article, String text) {
         if (userName != null && repository.findByUserNameAndUserId(userName, userId) == null) {

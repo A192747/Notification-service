@@ -5,13 +5,16 @@ spring:
   application:
     name: message-handler-service
   kafka:
+    topics:
+      partitions: 2
+      mailing: mailingTopic
     bootstrap-servers: localhost:9092
     consumer:
       group-id: mailing
   servlet:
     multipart:
-      max-file-size: 4MB
-      max-request-size: 4MB
+      max-file-size: 1MB
+      max-request-size: 1MB
   cassandra:
     port: 9042
     contact-points: usersContactsKeyspace
