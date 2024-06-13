@@ -1,6 +1,7 @@
 package ru.micro.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import ru.micro.dto.Message;
 import ru.micro.entity.Contacts;
@@ -16,6 +17,9 @@ public class MessageSender {
     ContactsRepository repository;
     @Autowired
     private EmailSender emailSender;
+
+    @Value("${mailing.send}")
+    private Boolean sendMessages;
 //    @Autowired
 //    private SmsSender smsSender;
 
@@ -42,8 +46,8 @@ public class MessageSender {
             list = inProcess;
         else
             setStatusAndSave(list, MailingStatus.IN_PROCESS);
-
-        list.forEach(el -> sendMessage(el, message));
+        if(sendMessages)
+            list.forEach(el -> sendMessage(el, message));
         setStatusAndSave(list, MailingStatus.NOT_STARTED);
     }
 

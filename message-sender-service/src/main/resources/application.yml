@@ -28,3 +28,8 @@ eureka:
     instance-id: ${spring.application.name}:${random.uuid}
 
 
+mailing:
+  send: true # для того, чтобы можно было неотправлять сообщения (тестирования)
+  retrying-count: 3 #  количество попыток заново отправить сообщение после неудачной попытки
+
+
