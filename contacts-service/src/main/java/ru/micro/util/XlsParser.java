@@ -1,6 +1,7 @@
 package ru.micro.util;
 
 import com.sun.jdi.InternalException;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.ss.usermodel.Sheet;
 import org.apache.poi.ss.usermodel.Workbook;
@@ -24,20 +25,23 @@ public class XlsParser {
         }
     }
 
-    private Map<String, String> getRows(Workbook workbook) throws IOException {
+    private List<Map.Entry<String, String>> getRows(Workbook workbook) throws IOException {
         Sheet sheet = workbook.getSheetAt(0);
-        Map<String, String> data = new HashMap<>();
+        List<Map.Entry<String, String>> data = new LinkedList<>();
         for (Row row : sheet) {
-            data.put(row.getCell(0).toString(), row.getCell(1).toString());
+            Cell cell0 = row.getCell(0);
+            Cell cell1 = row.getCell(1);
+            if (cell0 != null && cell1 != null)
+                data.add(Map.entry(row.getCell(0).toString(), row.getCell(1).toString()));
         }
         workbook.close();
         return data;
     }
 
     public List<Contacts> getContacts(int ownerId, MultipartFile file) throws IOException {
-        Map<String, String> result = getRows(read(file));
+        List<Map.Entry<String, String>> result = getRows(read(file));
         List<Contacts> contacts = new ArrayList<>();
-        for (Map.Entry<String, String> pair : result.entrySet()) {
+        for (Map.Entry<String, String> pair : result) {
             Contacts contact = new Contacts();
             contact.setId(UUID.randomUUID());
             contact.setUserId(ownerId);
