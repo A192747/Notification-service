@@ -8,7 +8,7 @@ servers:
 paths:
   /contacts:
     post:
-      summary: "Загрузить список контактов"
+      summary: "Загрузить файл с контактами"
       operationId: "save"
       parameters:
         - name: "file"
@@ -17,17 +17,12 @@ paths:
           schema:
             type: "string"
             format: "binary"
-        - name: "id"
-          in: "header"
-          required: true
-          schema:
-            type: "integer"
-            format: "int32"
+        
       responses:
         "200":
           description: "OK"
     get:
-      summary: "Получить загруженные контакты"
+      summary: "Получить загруженный список контактов"
       operationId: "getContacts"
       
       responses:
@@ -39,6 +34,36 @@ paths:
                 type: "array"
                 items:
                   $ref: "#/components/schemas/ContactResponse"
+    delete:
+      summary: "Удалить контакты по имени"
+      operationId: "deleteContacts"
+      
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/DeleteRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
+    patch:
+      summary: "Изменить контакт контактов"
+      operationId: "updateContacts"
+      
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: "array"
+              items:
+                $ref: "#/components/schemas/ContactRequest"
+        required: true
+      responses:
+        "200":
+          description: "OK"
 components:
   schemas:
     ContactResponse:
@@ -55,3 +80,15 @@ components:
             - "Tg"
             - "Sms"
             - "Unknown"
+    DeleteRequest:
+      type: "object"
+      properties:
+        name:
+          type: "string"
+    ContactRequest:
+      type: "object"
+      properties:
+        userName:
+          type: "string"
+        contact:
+          type: "string"
